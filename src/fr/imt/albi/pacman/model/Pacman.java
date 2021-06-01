@@ -110,6 +110,7 @@ public class Pacman extends Creature {
 			 * déplacer - garder une trace du dernier déplacement effectué (y a un attribut
 			 * de classe pour ça) - Animer sa bouche ;)
 			 */
+			
 		} else {
 			/*
 			 * TODO Si le déplacement n'est possible, il faut pouvoir récupérer les
