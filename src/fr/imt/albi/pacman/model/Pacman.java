@@ -58,6 +58,10 @@ public class Pacman extends Creature {
 	private void checkIfNewLife() {
 		// TODO Là, faut vérifier si le Pacman a atteint la limite pour avoir une vie
 		// supplémentaire :)
+		if (this.currentScore > Pacman.LIFE_POINT_THRESHOLD) {
+			this.currentScore -= Pacman.LIFE_POINT_THRESHOLD;
+			this.currentLife += 1;
+		}
 	}
 
 	public void updateScoreGhost() {
