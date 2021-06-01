@@ -51,8 +51,7 @@ public class Pacman extends Creature {
 	}
 
 	public void updateScoreFood() {
-		// TODO Là, si Pacman a reçu un power-up, faut incrémenter le score comme il se
-		// doit.
+		this.currentScore += Food.POWER_UP_SCORE;
 	}
 
 	private void checkIfNewLife() {
@@ -61,8 +60,7 @@ public class Pacman extends Creature {
 	}
 
 	public void updateScoreGhost() {
-		// TODO Là, si Pacman bouffe un fantome, faut incrémenter le score comme il faut
-		// aussi.
+		this.currentScore += Ghost.GHOST_SCORE;
 	}
 
 	public int getCurrentScore() {
