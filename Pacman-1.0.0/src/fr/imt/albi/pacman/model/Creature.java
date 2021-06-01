@@ -117,11 +117,43 @@ abstract class Creature {
 		int heightMap = Canvas.HEIGHT;
 		// La largeur
 		int widthMap = Canvas.WIDTH;
+		
+		int sizeCase = this.gameMap.getSizeCase();
 
 		// TODO Ici, il faut gérer l'évolution des coordonnées en fonction de la
 		// direction choisie :)
 		if (direction.equals(PacManLauncher.UP) || direction.equals(PacManLauncher.DOWN)
 				|| direction.equals(PacManLauncher.LEFT) || direction.equals(PacManLauncher.RIGHT)) {
+			switch (direction) {
+				case "UP":
+					xMove = 0;
+					yMove = - sizeCase;
+					if (yPosition + yMove < 0) {
+						yMove = heightMap - yMove;
+					}
+					break;
+				case "DOWN":
+					xMove = 0;
+					yMove = sizeCase;
+					if (yMove + yPosition >= heightMap) {
+						yMove = - heightMap + yPosition;
+					}
+					break;
+				case "LEFT":
+					xMove = - sizeCase;
+					yMove = 0;
+					if (xMove + xPosition < 0) {
+						xMove = widthMap - xPosition;
+					}
+					break;
+				case "RIGHT":
+					xMove = sizeCase;
+					yMove = 0;
+					if (xMove + xPosition >= widthMap) {
+						xMove = xPosition - widthMap;
+					}
+					break;
+			}
 		}
 
 		ret[0] = xMove;
