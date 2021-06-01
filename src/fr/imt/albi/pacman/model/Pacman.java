@@ -210,6 +210,16 @@ public class Pacman extends Creature {
 				 * qu'il y avait dedans - Mettre à jour le score - Sachant qu'un food peut être
 				 * un powerup, y a un truc à gérer :)
 				 */
+				if (food.isPowerUp()) {
+					this.isEmpowered = true;
+					this.updateScoreFood();
+				}
+				this.checkIfNewLife();
+				
+				food.setFood(null);
+				food.draw();
+				this.gameMap.pickFood();
+				this.gameMap.draw();
 			}
 		}
 	}
