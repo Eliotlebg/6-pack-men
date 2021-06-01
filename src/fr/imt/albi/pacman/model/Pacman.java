@@ -101,8 +101,24 @@ public class Pacman extends Creature {
 	public void move(String direction) {
 		int xMove = 0;
 		int yMove = 0;
+		int[] naviguation = new int[2];
+		
 
 		if (this.isMovePossible(direction)) {
+			
+			this.lastMovement=direction;
+			this.lastPosition=direction;
+			
+			naviguation=navigateInMap(direction);
+			xMove = naviguation[0];
+			yMove = naviguation[1];
+			
+			naviguation = this.checkCollision(direction, xMove, yMove);
+			xMove = naviguation[0];
+			yMove = naviguation[1];
+			
+			this.pacman.move(xMove, yMove);
+
 			/*
 			 * TODO Si le déplacement est possible, il faut : - récupérer les nouvelles
 			 * coordonnées, - voir avec quoi on risque de se percuter avec ces nouvelles
@@ -112,6 +128,16 @@ public class Pacman extends Creature {
 			 */
 			
 		} else {
+			naviguation=navigateInMap(this.lastMovement);
+			xMove = naviguation[0];
+			yMove = naviguation[1];
+			
+			naviguation = this.checkCollision(this.lastMovement, xMove, yMove);
+			xMove = naviguation[0];
+			yMove = naviguation[1];
+			
+			this.pacman.move(xMove, yMove);
+			
 			/*
 			 * TODO Si le déplacement n'est possible, il faut pouvoir récupérer les
 			 * coordonnées en partant du principe que sa direction sera égale à la dernière
@@ -120,6 +146,7 @@ public class Pacman extends Creature {
 			 * bouche ceci dit !
 			 */
 		}
+		this.animateMouth();
 	}
 
 	/**
@@ -215,6 +242,16 @@ public class Pacman extends Creature {
 				 * qu'il y avait dedans - Mettre à jour le score - Sachant qu'un food peut être
 				 * un powerup, y a un truc à gérer :)
 				 */
+				if (food.isPowerUp()) {
+					this.isEmpowered = true;
+					this.updateScoreFood();
+				}
+				this.checkIfNewLife();
+				
+				food.setFood(null);
+				food.draw();
+				this.gameMap.pickFood();
+				this.gameMap.draw();
 			}
 		}
 	}
