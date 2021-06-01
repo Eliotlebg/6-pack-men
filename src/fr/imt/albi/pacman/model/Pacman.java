@@ -43,9 +43,7 @@ public class Pacman extends Creature {
 	}
 
 	public void removeLife() {
-		// TODO Méthode qui gère le retrait d'une vie à Pacman
 		this.currentLife=this.currentLife-1;
-		return this.currentLife
 		
 	}
 
