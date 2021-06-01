@@ -250,7 +250,6 @@ public class Pacman extends Creature {
 				food.setFood(null);
 				food.draw();
 				this.gameMap.pickFood();
-				this.gameMap.draw();
 			}
 		}
 	}
