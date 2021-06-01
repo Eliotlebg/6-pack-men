@@ -120,8 +120,6 @@ abstract class Creature {
 		
 		int sizeCase = this.gameMap.getSizeCase();
 
-		// TODO Ici, il faut gérer l'évolution des coordonnées en fonction de la
-		// direction choisie :)
 		if (direction.equals(PacManLauncher.UP) || direction.equals(PacManLauncher.DOWN)
 				|| direction.equals(PacManLauncher.LEFT) || direction.equals(PacManLauncher.RIGHT)) {
 			switch (direction) {
