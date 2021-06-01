@@ -104,11 +104,12 @@ public class Pacman extends Creature {
 		int[] naviguation = new int[2];
 		
 
+
 		if (this.isMovePossible(direction)) {
 			
 			this.lastMovement=direction;
 			this.lastPosition=direction;
-			
+			this.animateMouth();
 			naviguation=navigateInMap(direction);
 			xMove = naviguation[0];
 			yMove = naviguation[1];
@@ -127,6 +128,7 @@ public class Pacman extends Creature {
 			 * de classe pour ça) - Animer sa bouche ;)
 			 */
 		} else {
+			this.animateMouth();
 			naviguation=navigateInMap(this.lastMovement);
 			xMove = naviguation[0];
 			yMove = naviguation[1];
@@ -145,7 +147,6 @@ public class Pacman extends Creature {
 			 * bouche ceci dit !
 			 */
 		}
-		this.animateMouth();
 	}
 
 	/**
