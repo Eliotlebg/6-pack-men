@@ -58,6 +58,10 @@ public class Pacman extends Creature {
 	private void checkIfNewLife() {
 		// TODO Là, faut vérifier si le Pacman a atteint la limite pour avoir une vie
 		// supplémentaire :)
+		if (this.currentScore > Pacman.LIFE_POINT_THRESHOLD) {
+			this.currentScore -= Pacman.LIFE_POINT_THRESHOLD;
+			this.currentLife += 1;
+		}
 	}
 
 	public void updateScoreGhost() {
@@ -237,6 +241,16 @@ public class Pacman extends Creature {
 				 * qu'il y avait dedans - Mettre à jour le score - Sachant qu'un food peut être
 				 * un powerup, y a un truc à gérer :)
 				 */
+				if (food.isPowerUp()) {
+					this.isEmpowered = true;
+					this.updateScoreFood();
+				}
+				this.checkIfNewLife();
+				
+				food.setFood(null);
+				food.draw();
+				this.gameMap.pickFood();
+				this.gameMap.draw();
 			}
 		}
 	}
