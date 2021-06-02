@@ -120,6 +120,7 @@ public class Pacman extends Creature {
 			
 			this.pacman.move(xMove, yMove);
 
+
 			/*
 			 * TODO Si le déplacement est possible, il faut : - récupérer les nouvelles
 			 * coordonnées, - voir avec quoi on risque de se percuter avec ces nouvelles
@@ -167,27 +168,27 @@ public class Pacman extends Creature {
 
 			Figure fUp = map[yPosition - 1][xPosition];
 			Figure fDown = map[yPosition + 1][xPosition];
-			Figure fleft = map[yPosition][xPosition - 1];
+			Figure fLeft = map[yPosition][xPosition - 1];
 			Figure fRight = map[yPosition][xPosition + 1];
 
 			switch (direction) {
 				case PacManLauncher.UP:
-					if (fUp.getClass().getName().compareTo("view.Wall") != 0) {
+					if (!(fUp instanceof Wall)) {
 						canMove = true;
 					}
 					break;
 				case PacManLauncher.DOWN:
-					if (fDown.getClass().getName().compareTo("view.Wall") != 0) {
+					if (!(fDown instanceof Wall)) {
 						canMove = true;
 					}
 					break;
 				case PacManLauncher.LEFT:
-					if (fleft.getClass().getName().compareTo("view.Wall") != 0) {
+					if (!(fLeft instanceof Wall)) {
 						canMove = true;
 					}
 					break;
 				case PacManLauncher.RIGHT:
-					if (fRight.getClass().getName().compareTo("view.Wall") != 0) {
+					if (!(fRight instanceof Wall)) {
 						canMove = true;
 					}
 					break;
