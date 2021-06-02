@@ -14,13 +14,13 @@ public class PacManLauncher {
 	public static final String DOWN = "DOWN";
 	public static final String LEFT = "LEFT";
 	public static final String RIGHT = "RIGHT";
-	private static final int NBR_LVL = 3;
+	private static final int NBR_LVL = 4;
 	private GameMap maps;
 	private final Pacman pacman;
 	private Ghost[] ghost;
 
 	public PacManLauncher() {
-		this.maps = new GameMap(1);
+		this.maps = new GameMap(4);
 		this.fillGhost();
 		this.pacman = new Pacman(this.maps.getSizeCase(), this.maps.getPacmanX(), this.maps.getPacmanY());
 		this.pacman.setMap(this.maps);

@@ -9,7 +9,7 @@ public class Food extends Figure {
 	private boolean isPowerUp;
 
 	public Food(int size, int x, int y) {
-		super(size, size, x, y, "black");
+		super(size, size, x, y, "green");
 		this.figures = new Figure[2];
 		this.figures[0] = new Square(size, x, y, COLOR_WALK);
 	}
