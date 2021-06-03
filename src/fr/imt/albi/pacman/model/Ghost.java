@@ -27,8 +27,8 @@ public class Ghost extends Creature {
         this.ghostSkin = new GhostSkin(size, x, y, color);
     }
 
-    public void move() {
-        if (this.counterFear == 0) {
+    public void move(Pacman pacman) {
+        /*if (this.counterFear == 0) {
             this.setNormalState();
         }
         if (this.counterFear % 2 == 1 || this.counterFear == 0) {
@@ -38,17 +38,13 @@ public class Ghost extends Creature {
             this.counterUTurn--;
             if (this.counterUTurn == 0) {
                 switch (this.previousMove) {
-                    case PacManLauncher.UP:
-                        this.move(PacManLauncher.DOWN);
+                    case PacManLauncher.UP:this.move(PacManLauncher.DOWN);
                         break;
-                    case PacManLauncher.DOWN:
-                        this.move(PacManLauncher.UP);
+                    case PacManLauncher.DOWN:this.move(PacManLauncher.UP);
                         break;
-                    case PacManLauncher.LEFT:
-                        this.move(PacManLauncher.RIGHT);
+                    case PacManLauncher.LEFT:this.move(PacManLauncher.RIGHT);
                         break;
-                    case PacManLauncher.RIGHT:
-                        this.move(PacManLauncher.LEFT);
+                    case PacManLauncher.RIGHT:this.move(PacManLauncher.LEFT);
                         break;
                 }
                 this.initUTurnCounter();
@@ -57,8 +53,47 @@ public class Ghost extends Creature {
             }
         } else {
             this.counterFear--;
+        }*/
+    	
+    	int sizeCase = this.gameMap.getSizeCase();
+    	    	
+    	double normePlusX = Math.sqrt(Math.pow(pacman.getX()-(this.getX() + sizeCase), 2) + Math.pow(pacman.getY()-this.getY(), 2));
+    	double normeMoinsX = Math.sqrt(Math.pow(pacman.getX()-(this.getX() - sizeCase), 2) + Math.pow(pacman.getY()-this.getY(), 2));
+    	double normePlusY = Math.sqrt(Math.pow(pacman.getX()-(this.getX()), 2) + Math.pow(pacman.getY()-(this.getY() + sizeCase), 2));
+    	double normeMoinsY = Math.sqrt(Math.pow(pacman.getX()-(this.getX()), 2) + Math.pow(pacman.getY()-(this.getY() - sizeCase), 2));
+    	
+    	double minNormes = Double.min(Double.min(normePlusX,normeMoinsX),Double.min(normePlusY,normeMoinsY));
+    	double maxNormesx2 = 2*Double.max(Double.max(normePlusX,normeMoinsX),Double.max(normePlusY,normeMoinsY));
+    	
+    	double probaMoveAléatoire = Math.sqrt(Math.pow(pacman.getX()-(this.getX()), 2) + Math.pow(pacman.getY()-this.getY(), 2))/maxNormesx2;
+    	double seuilAléatoire = Math.random()/4;
+    	
+    	if (this.counterFear == 0) {
+            this.setNormalState();
+        }
+        if (this.counterFear % 2 == 1 || this.counterFear == 0) {
+            if (this.counterFear > 0) {
+                this.counterFear--;
+            }
+        		if (probaMoveAléatoire > seuilAléatoire) {
+        			checkCrossing(this.previousMove);
+        		} else {
+        			if (minNormes == normePlusY) {
+        				this.move(PacManLauncher.DOWN);
+        			} if (minNormes == normeMoinsY) {
+        				this.move(PacManLauncher.UP);
+        			} if (minNormes == normePlusX) {
+        				this.move(PacManLauncher.RIGHT);
+        			} if (minNormes == normeMoinsX) {
+        				this.move(PacManLauncher.LEFT);
+        			}
+        		}
+        } else {
+            this.counterFear--;
         }
     }
+    
+    /* Débugger fantômes immobiles */
 
     public void initUTurnCounter() {
         this.counterUTurn = (int) (Math.random() * 30) + 20;
@@ -78,8 +113,8 @@ public class Ghost extends Creature {
         yMove = crossMap[1];
 
         this.move(xMove, yMove);
-    }
-
+    }    
+    
     public void move(int dx, int dy) {
         for (Figure figure : this.getSkin()) {
             figure.move(dx, dy);
@@ -200,7 +235,7 @@ public class Ghost extends Creature {
         ArrayList<Figure> toGo = new ArrayList<Figure>();
 
         for (Figure f : listF) {
-            if (f.getClass().getName().compareTo("view.Wall") != 0) {
+            if (!(f instanceof Wall)) {
                 toGo.add(f);
             }
         }

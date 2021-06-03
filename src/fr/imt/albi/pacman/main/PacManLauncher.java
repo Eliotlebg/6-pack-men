@@ -20,7 +20,7 @@ public class PacManLauncher {
 	private Ghost[] ghost;
 
 	public PacManLauncher() {
-		this.maps = new GameMap(4);
+		this.maps = new GameMap(6);
 		this.fillGhost();
 		this.pacman = new Pacman(this.maps.getSizeCase(), this.maps.getPacmanX(), this.maps.getPacmanY());
 		this.pacman.setMap(this.maps);
@@ -113,7 +113,7 @@ public class PacManLauncher {
 			this.collisionGhost();
 
 			for (Ghost g : this.ghost) {
-				g.move();
+				g.move(this.pacman);
 			}
 			this.collisionGhost();
 			Canvas.getCanvas().redraw(this.pacman.getCurrentScore(), this.pacman.getCurrentLife(), Score.getScore());
