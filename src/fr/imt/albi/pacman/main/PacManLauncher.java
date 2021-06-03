@@ -20,7 +20,7 @@ public class PacManLauncher {
 	private Ghost[] ghost;
 
 	public PacManLauncher() {
-		this.maps = new GameMap(5);
+		this.maps = new GameMap(4);
 		this.fillGhost();
 		this.pacman = new Pacman(this.maps.getSizeCase(), this.maps.getPacmanX(), this.maps.getPacmanY());
 		this.pacman.setMap(this.maps);

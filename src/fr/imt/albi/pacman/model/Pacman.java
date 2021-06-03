@@ -51,8 +51,12 @@ public class Pacman extends Creature {
 		return this.currentLife;
 	}
 
-	public void updateScoreFood() {
-		this.currentScore += Food.POWER_UP_SCORE;
+	public void updateScoreFood(Food f) {
+		if (f.isPowerUp()) {
+			this.currentScore += Food.POWER_UP_SCORE;
+		} else {
+			this.currentScore += 1;
+		}
 	}
 
 	private void checkIfNewLife() {
@@ -246,7 +250,9 @@ public class Pacman extends Creature {
 				 */
 				if (food.isPowerUp()) {
 					this.isEmpowered = true;
-					this.updateScoreFood();
+					this.updateScoreFood(food);
+				} else {
+					this.updateScoreFood(food);
 				}
 				this.checkIfNewLife();
 				
